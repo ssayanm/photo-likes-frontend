@@ -7,8 +7,8 @@ const Post = ({ description, likes, url }) => {
       : process.env.REACT_APP_BACKEND_URL + url;
 
   return (
-    <div className="Post">
-      <img className="Post__Image" src={imageUrl} alt={description} />
+    <div className="post">
+      <img className="post-img" src={imageUrl} alt={description} />
       <h4>{description}</h4>
       <div>
         <span>Likes: {likes}</span>

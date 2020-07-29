@@ -16,14 +16,14 @@ const Nav = () => {
         </NavLink>
       )}
       {!user && (
-        <div>
+        <>
           <NavLink to="/login" exact>
             Login
           </NavLink>
           <NavLink to="/signup" exact>
             Signup
           </NavLink>
-        </div>
+        </>
       )}
     </nav>
   );
