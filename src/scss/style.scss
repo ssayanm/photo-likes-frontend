@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+
+$font-stack: "Oswald", sans-serif;
+
+$primary-color: hsl(217, 100%, 53%);
+$secondary-color: hsl(31, 100%, 51%);
+$light-color: hsl(0, 0%, 96%);
+$dark-color: hsl(0, 0%, 6%);
+$dark-background: hsla(0, 0%, 0%, 0.4);
+$light-background: hsla(0, 0%, 0%, 0.2);
+$gradient: linear-gradient(to top, #09203f 0%, #537895 100%);
+
+$large: 4rem;
+$medium: 2.75rem;
+$small: 2rem;
+$smallest: 1.3rem;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  // background-image: $gradient;
+  background-image: $gradient;
+  font-family: $font-stack;
+  color: $light-color;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  flex-direction: column;
+}
+
+// body {
+//     width: 290px;
+//     margin: 0 auto;
+//     background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+//   }
+.Post {
+  margin: 12px auto;
+  padding: 12px 20px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.Post__Image {
+  max-width: 250px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: $light-color;
+}

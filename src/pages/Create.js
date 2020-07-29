@@ -5,7 +5,7 @@ const Create = () => {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
-
+  const url = process.env.REACT_APP_BACKEND_URL;
   console.log("file", file);
 
   const { user } = useContext(UserContext);
@@ -15,7 +15,6 @@ const Create = () => {
 
     if (!user) {
       setError("Please log in first");
-
       return;
     }
 
@@ -34,7 +33,7 @@ const Create = () => {
     formData.append("files.image", file);
 
     try {
-      const response = await fetch("http://localhost:1337/posts", {
+      const response = await fetch(`${url}/posts`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${user.jwt}`,

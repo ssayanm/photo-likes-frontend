@@ -5,7 +5,7 @@ export const LikesContext = createContext(null);
 
 export default ({ children }) => {
   const { user } = useContext(UserContext);
-
+  const url = process.env.REACT_APP_BACKEND_URL;
   const [likesGiven, setLikesGiven] = useState([]);
   const [likesReceived, setLikesReceived] = useState([]);
 
@@ -13,7 +13,7 @@ export default ({ children }) => {
     if (user) {
       const loadLikesGiven = async () => {
         const response = await fetch(
-          `http://localhost:1337/likes/given?user=${user.user.id}`,
+          `${url}/likes/given?user=${user.user.id}`,
           {
             headers: {
               Authorization: `Bearer ${user.jwt}`,

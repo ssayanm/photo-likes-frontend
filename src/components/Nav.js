@@ -6,7 +6,7 @@ const Nav = () => {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="Nav">
+    <nav>
       <NavLink to="/" exact>
         Home
       </NavLink>
@@ -25,7 +25,7 @@ const Nav = () => {
           </NavLink>
         </div>
       )}
-    </div>
+    </nav>
   );
 };
 

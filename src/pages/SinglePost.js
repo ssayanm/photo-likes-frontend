@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import Post from "../components/Post";
-
+import { ReactComponent as Loading } from "../../src/images/loader.svg";
 import { UserContext } from "../context/UserContext";
 import { LikesContext } from "../context/LikesContext";
 
 const SinglePost = ({ match, history }) => {
   const { id } = match.params;
   console.log("id", id);
+  const url = process.env.REACT_APP_BACKEND_URL;
 
   const { user, setUser } = useContext(UserContext);
   console.log("user", user);
@@ -30,7 +31,7 @@ const SinglePost = ({ match, history }) => {
   const [description, setDescription] = useState("");
 
   const fetchPost = async () => {
-    const response = await fetch(`http://localhost:1337/posts/${id}`);
+    const response = await fetch(`${url}/posts/${id}`);
     const data = await response.json();
 
     console.log("data", data);
@@ -40,7 +41,7 @@ const SinglePost = ({ match, history }) => {
   };
 
   const handleDelete = async () => {
-    const response = await fetch(`http://localhost:1337/posts/${id}`, {
+    const response = await fetch(`${url}/posts/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${user.jwt}`,
@@ -54,7 +55,7 @@ const SinglePost = ({ match, history }) => {
     event.preventDefault();
     console.log("handleEditSubmit");
 
-    const response = await fetch(`http://localhost:1337/posts/${id}`, {
+    const response = await fetch(`${url}/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +73,7 @@ const SinglePost = ({ match, history }) => {
 
   const handleLike = async () => {
     try {
-      const response = await fetch("http://localhost:1337/likes", {
+      const response = await fetch(`${url}/likes`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${user.jwt}`,
@@ -91,7 +92,7 @@ const SinglePost = ({ match, history }) => {
 
   const handleRemoveLike = async () => {
     try {
-      const response = await fetch(`http://localhost:1337/likes/${id}`, {
+      const response = await fetch(`${url}/likes/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${user.jwt}`,
@@ -110,11 +111,11 @@ const SinglePost = ({ match, history }) => {
 
   return (
     <div>
-      {loading && <p>Loading...</p>}
+      {loading && <Loading />}
       {!loading && (
-        <>
+        <div>
           {post.id && (
-            <>
+            <div>
               <Post
                 description={post.description}
                 url={post.image && post.image.url}
@@ -122,7 +123,7 @@ const SinglePost = ({ match, history }) => {
               />
 
               {user && (
-                <>
+                <div>
                   {isPostAlreadyLiked && (
                     <button onClick={handleRemoveLike}>Remove Like</button>
                   )}
@@ -130,7 +131,7 @@ const SinglePost = ({ match, history }) => {
                   {!isPostAlreadyLiked && (
                     <button onClick={handleLike}>Like</button>
                   )}
-                </>
+                </div>
               )}
 
               {user &&
@@ -138,7 +139,7 @@ const SinglePost = ({ match, history }) => {
                 post &&
                 post.author &&
                 post.author.id === user.user.id && (
-                  <>
+                  <div>
                     <button onClick={handleDelete}>Delete this Post</button>
                     <button onClick={() => setEdit(true)}>
                       Edit this Post
@@ -155,12 +156,12 @@ const SinglePost = ({ match, history }) => {
                         <button>Confirm</button>
                       </form>
                     )}
-                  </>
+                  </div>
                 )}
-            </>
+            </div>
           )}
           {!post.id && <p>404 - not found</p>}
-        </>
+        </div>
       )}
     </div>
   );
