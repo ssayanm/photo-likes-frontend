@@ -3,25 +3,25 @@ import { Link } from "react-router-dom";
 
 import Post from "../components/Post";
 
-export default () => {
+const Home = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    const url = process.env.REACT_APP_BACKEND_URL;
+
     const getPosts = async () => {
-      const response = await fetch("http://localhost:1337/posts");
+      const response = await fetch(`${url}/posts`);
       const data = await response.json();
       setPosts(data);
     };
-
     getPosts();
   }, []);
 
   return (
     <div className="Home">
       {posts.map((post) => (
-        <Link to={`/${post.id}`}>
+        <Link to={`/${post.id}`} key={post.id}>
           <Post
-            key={post.id}
             likes={post.likes}
             description={post.description}
             url={post.image && post.image.url}
@@ -31,3 +31,5 @@ export default () => {
     </div>
   );
 };
+
+export default Home;
