@@ -51,14 +51,14 @@ const Create = () => {
   };
 
   return (
-    <div className="Create">
-      <h2>Create</h2>
+    <div className="create section">
+      <h2>Create a Post</h2>
 
       {error && <p>{error}</p>}
 
       <form onSubmit={handleSubmit}>
         <input
-          placeholder="Description"
+          placeholder="Please enter a description"
           value={description}
           onChange={(event) => {
             setError("");
@@ -73,7 +73,7 @@ const Create = () => {
             setFile(event.target.files[0]);
           }}
         />
-        <button>Submit</button>
+        <button className="btn">Submit</button>
       </form>
     </div>
   );

@@ -47,8 +47,8 @@ const Signup = ({ history }) => {
   };
 
   return (
-    <div>
-      <h2>Signup</h2>
+    <div className="signup section">
+      <h2>Please Signup</h2>
 
       <form onSubmit={handleSubmit}>
         <input
@@ -61,7 +61,7 @@ const Signup = ({ history }) => {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
-        <button>Signup</button>
+        <button className="btn">Signup</button>
       </form>
 
       {error && <p>{error}</p>}

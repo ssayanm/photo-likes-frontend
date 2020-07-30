@@ -110,7 +110,7 @@ const SinglePost = ({ match, history }) => {
   }, []);
 
   return (
-    <div>
+    <div className="singlepost section">
       {loading && <Loading />}
       {!loading && (
         <div>

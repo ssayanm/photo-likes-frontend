@@ -18,7 +18,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home">
+    <div className="home section">
       {posts.map((post) => (
         <Link to={`/${post.id}`} key={post.id}>
           <Post

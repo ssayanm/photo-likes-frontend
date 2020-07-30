@@ -14,7 +14,7 @@ import "./scss/style.scss";
 function App() {
   return (
     <div className="App">
-      <h2>App</h2>
+      <h2>Photo Likes App</h2>
 
       <BrowserRouter>
         <Nav />
