@@ -54,9 +54,14 @@ body {
   border-radius: 4px;
   background-color: $secondary-color;
   cursor: pointer;
-
   &:hover {
     background-color: $primary-color;
+  }
+  .primary {
+    background-color: $primary-color;
+    &:hover {
+      background-color: $secondary-color;
+    }
   }
 }
 .post {
@@ -87,7 +92,8 @@ nav {
 .create {
   background: $light-color;
 
-  h2 {
+  h2,
+  p {
     color: $dark-color;
   }
   form {

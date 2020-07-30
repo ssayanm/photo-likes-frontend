@@ -12,30 +12,38 @@ export default ({ children }) => {
   const reloader = () => {
     if (user) {
       const loadLikesGiven = async () => {
-        const response = await fetch(
-          `${url}/likes/given?user=${user.user.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.jwt}`,
-            },
-          }
-        );
-        const data = await response.json();
-        setLikesGiven(data);
+        try {
+          const response = await fetch(
+            `${url}/likes/given?user=${user.user.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${user.jwt}`,
+              },
+            }
+          );
+          const data = await response.json();
+          setLikesGiven(data);
+        } catch (err) {
+          console.log(err);
+        }
       };
       loadLikesGiven();
 
       const loadLikesReceived = async () => {
-        const response = await fetch(
-          `http://localhost:1337/likes/received?post.author=${user.user.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.jwt}`,
-            },
-          }
-        );
-        const data = await response.json();
-        setLikesReceived(data);
+        try {
+          const response = await fetch(
+            `${url}/likes/received?post.author=${user.user.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${user.jwt}`,
+              },
+            }
+          );
+          const data = await response.json();
+          setLikesReceived(data);
+        } catch (err) {
+          console.log(err);
+        }
       };
       loadLikesReceived();
     }

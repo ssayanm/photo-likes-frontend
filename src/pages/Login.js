@@ -6,6 +6,7 @@ const Login = ({ history }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const url = process.env.REACT_APP_BACKEND_URL;
+
   const { user, setUser } = useContext(UserContext);
   console.log("user", user);
 
@@ -35,7 +36,6 @@ const Login = ({ history }) => {
 
       if (data.message) {
         setError(data.message[0].messages[0].message);
-
         return; //Stop execution
       }
 
@@ -48,7 +48,6 @@ const Login = ({ history }) => {
   return (
     <div className="login section">
       <h2>Please Login</h2>
-
       <form onSubmit={handleSubmit}>
         <input
           type="email"

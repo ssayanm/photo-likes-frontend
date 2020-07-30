@@ -54,21 +54,24 @@ const SinglePost = ({ match, history }) => {
   const handleEditSubmit = async (event) => {
     event.preventDefault();
     console.log("handleEditSubmit");
+    try {
+      const response = await fetch(`${url}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.jwt}`,
+        },
+        body: JSON.stringify({
+          description,
+        }),
+      });
 
-    const response = await fetch(`${url}/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.jwt}`,
-      },
-      body: JSON.stringify({
-        description,
-      }),
-    });
-
-    const data = await response.json();
-    fetchPost();
-    console.log("handleEditSubmit data", data);
+      const data = await response.json();
+      fetchPost();
+      console.log("handleEditSubmit data", data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleLike = async () => {
@@ -125,11 +128,15 @@ const SinglePost = ({ match, history }) => {
               {user && (
                 <div>
                   {isPostAlreadyLiked && (
-                    <button onClick={handleRemoveLike}>Remove Like</button>
+                    <button className="btn" onClick={handleRemoveLike}>
+                      Remove Like
+                    </button>
                   )}
 
                   {!isPostAlreadyLiked && (
-                    <button onClick={handleLike}>Like</button>
+                    <button className="btn" onClick={handleLike}>
+                      Like
+                    </button>
                   )}
                 </div>
               )}
@@ -140,8 +147,10 @@ const SinglePost = ({ match, history }) => {
                 post.author &&
                 post.author.id === user.user.id && (
                   <div>
-                    <button onClick={handleDelete}>Delete this Post</button>
-                    <button onClick={() => setEdit(true)}>
+                    <button className="btn primary" onClick={handleDelete}>
+                      Delete this Post
+                    </button>
+                    <button className="btn" onClick={() => setEdit(true)}>
                       Edit this Post
                     </button>
                     {edit && (
@@ -153,7 +162,7 @@ const SinglePost = ({ match, history }) => {
                           }
                           placeholder="New description"
                         />
-                        <button>Confirm</button>
+                        <button className="btn">Confirm</button>
                       </form>
                     )}
                   </div>

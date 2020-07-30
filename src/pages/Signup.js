@@ -5,6 +5,7 @@ const Signup = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const url = process.env.REACT_APP_BACKEND_URL;
 
   const { user, setUser } = useContext(UserContext);
 
@@ -18,20 +19,17 @@ const Signup = ({ history }) => {
     event.preventDefault();
 
     try {
-      const response = await fetch(
-        "http://localhost:1337/auth/local/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            username: email,
-            email,
-            password,
-          }),
-        }
-      );
+      const response = await fetch(`${url}/auth/local/register`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          username: email,
+          email,
+          password,
+        }),
+      });
       const data = await response.json();
       if (data.message) {
         setError(data.message[0].messages[0].message);
