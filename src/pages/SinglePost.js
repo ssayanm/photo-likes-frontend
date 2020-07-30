@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import Post from "../components/Post";
-import { ReactComponent as Loading } from "../../src/images/loader.svg";
+
 import { UserContext } from "../context/UserContext";
 import { LikesContext } from "../context/LikesContext";
 
 const SinglePost = ({ match, history }) => {
   const { id } = match.params;
   console.log("id", id);
-  const url = process.env.REACT_APP_BACKEND_URL;
 
   const { user, setUser } = useContext(UserContext);
   console.log("user", user);
@@ -17,7 +16,7 @@ const SinglePost = ({ match, history }) => {
 
   const isPostAlreadyLiked = (() => {
     return (
-      likesGiven && likesGiven.find((like) => like.post && like.post.id === id)
+      likesGiven && likesGiven.find((like) => like.post && like.post.id == id)
     );
   })();
 
@@ -31,7 +30,7 @@ const SinglePost = ({ match, history }) => {
   const [description, setDescription] = useState("");
 
   const fetchPost = async () => {
-    const response = await fetch(`${url}/posts/${id}`);
+    const response = await fetch(`http://localhost:1337/posts/${id}`);
     const data = await response.json();
 
     console.log("data", data);
@@ -41,7 +40,7 @@ const SinglePost = ({ match, history }) => {
   };
 
   const handleDelete = async () => {
-    const response = await fetch(`${url}/posts/${id}`, {
+    const response = await fetch(`http://localhost:1337/posts/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${user.jwt}`,
@@ -54,29 +53,26 @@ const SinglePost = ({ match, history }) => {
   const handleEditSubmit = async (event) => {
     event.preventDefault();
     console.log("handleEditSubmit");
-    try {
-      const response = await fetch(`${url}/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.jwt}`,
-        },
-        body: JSON.stringify({
-          description,
-        }),
-      });
 
-      const data = await response.json();
-      fetchPost();
-      console.log("handleEditSubmit data", data);
-    } catch (err) {
-      console.log(err);
-    }
+    const response = await fetch(`http://localhost:1337/posts/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.jwt}`,
+      },
+      body: JSON.stringify({
+        description,
+      }),
+    });
+
+    const data = await response.json();
+    fetchPost();
+    console.log("handleEditSubmit data", data);
   };
 
   const handleLike = async () => {
     try {
-      const response = await fetch(`${url}/likes`, {
+      const response = await fetch("http://localhost:1337/likes", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${user.jwt}`,
@@ -95,7 +91,7 @@ const SinglePost = ({ match, history }) => {
 
   const handleRemoveLike = async () => {
     try {
-      const response = await fetch(`${url}/likes/${id}`, {
+      const response = await fetch(`http://localhost:1337/likes/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${user.jwt}`,
@@ -113,8 +109,8 @@ const SinglePost = ({ match, history }) => {
   }, []);
 
   return (
-    <div className="singlepost section">
-      {loading && <Loading />}
+    <div className="section">
+      {loading && <p>Loading...</p>}
       {!loading && (
         <div>
           {post.id && (
