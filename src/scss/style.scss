@@ -46,19 +46,21 @@ body {
   border-radius: 4px;
   background: $light-color;
   width: 20rem;
+  margin-bottom: 1rem;
 }
 
 .btn {
-  font-size: 1.2rem;
-  padding: 0.15rem 1rem;
+  font-size: 1rem;
+  padding: 0.5rem;
   border-radius: 4px;
   background-color: $secondary-color;
   cursor: pointer;
   &:hover {
     background-color: $primary-color;
   }
-  .primary {
+  &.primary {
     background-color: $primary-color;
+    color: $light-color;
     &:hover {
       background-color: $secondary-color;
     }
@@ -72,6 +74,13 @@ body {
   .post-img {
     max-width: 17rem;
   }
+}
+
+.post-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  flex-direction: column;
 }
 
 nav {
@@ -88,6 +97,7 @@ nav {
 }
 
 .login,
+.single,
 .signup,
 .create {
   background: $light-color;
@@ -101,13 +111,13 @@ nav {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
-    input {
-      width: 17rem;
-      height: 2rem;
-      margin: 0.5rem;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
+  }
+  input {
+    width: 17rem;
+    height: 2.5rem;
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 1rem;
   }
 }

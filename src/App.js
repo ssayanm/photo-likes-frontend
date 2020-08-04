@@ -15,10 +15,8 @@ function App() {
   return (
     <div className="App">
       <h2>Photo Likes App</h2>
-
       <BrowserRouter>
         <Nav />
-
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/create" exact component={Create} />

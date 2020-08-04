@@ -109,65 +109,73 @@ const SinglePost = ({ match, history }) => {
   }, []);
 
   return (
-    <div className="section">
-      {loading && <p>Loading...</p>}
-      {!loading && (
-        <div>
-          {post.id && (
-            <div>
-              <Post
-                description={post.description}
-                url={post.image && post.image.url}
-                likes={post.likes}
-              />
+    <div>
+      <div className="home section single">
+        {loading && <p>Loading...</p>}
+        {!loading && (
+          <div>
+            {post.id && (
+              <div>
+                <Post
+                  description={post.description}
+                  url={post.image && post.image.url}
+                  likes={post.likes}
+                />
 
-              {user && (
-                <div>
-                  {isPostAlreadyLiked && (
-                    <button className="btn" onClick={handleRemoveLike}>
-                      Remove Like
-                    </button>
-                  )}
-
-                  {!isPostAlreadyLiked && (
-                    <button className="btn" onClick={handleLike}>
-                      Like
-                    </button>
-                  )}
-                </div>
-              )}
-
-              {user &&
-                user.user &&
-                post &&
-                post.author &&
-                post.author.id === user.user.id && (
+                {user && (
                   <div>
-                    <button className="btn primary" onClick={handleDelete}>
-                      Delete this Post
-                    </button>
-                    <button className="btn" onClick={() => setEdit(true)}>
-                      Edit this Post
-                    </button>
-                    {edit && (
-                      <form onSubmit={handleEditSubmit}>
-                        <input
-                          value={description}
-                          onChange={(event) =>
-                            setDescription(event.target.value)
-                          }
-                          placeholder="New description"
-                        />
-                        <button className="btn">Confirm</button>
-                      </form>
+                    {isPostAlreadyLiked && (
+                      <button className="btn" onClick={handleRemoveLike}>
+                        Remove Like
+                      </button>
+                    )}
+
+                    {!isPostAlreadyLiked && (
+                      <button className="btn" onClick={handleLike}>
+                        Like
+                      </button>
                     )}
                   </div>
                 )}
-            </div>
-          )}
-          {!post.id && <p>404 - not found</p>}
-        </div>
-      )}
+
+                {user &&
+                  user.user &&
+                  post &&
+                  post.author &&
+                  post.author.id === user.user.id && (
+                    <div className="post-btn">
+                      <button className="btn primary" onClick={handleDelete}>
+                        Delete this Post
+                      </button>
+                      <button className="btn" onClick={() => setEdit(true)}>
+                        Edit this Post
+                      </button>
+                      {edit && (
+                        <form onSubmit={handleEditSubmit}>
+                          <input
+                            value={description}
+                            onChange={(event) =>
+                              setDescription(event.target.value)
+                            }
+                            placeholder="New description"
+                          />
+                          <button className="btn">Confirm</button>
+                        </form>
+                      )}
+                    </div>
+                  )}
+              </div>
+            )}
+            {!post.id && <p>404 - not found</p>}
+          </div>
+        )}
+      </div>{" "}
+      <p>
+        Please use the below details to login
+        <br /> or you can signup and login
+        <br /> username: admin@admin.com <br />
+        password: Admin1
+      </p>
     </div>
   );
 };

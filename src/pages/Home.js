@@ -18,16 +18,24 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home section">
-      {posts.map((post) => (
-        <Link to={`/${post.id}`} key={post.id}>
-          <Post
-            likes={post.likes}
-            description={post.description}
-            url={post.image && post.image.url}
-          />
-        </Link>
-      ))}
+    <div>
+      <div className="home section">
+        {posts.map((post) => (
+          <Link to={`/${post.id}`} key={post.id}>
+            <Post
+              likes={post.likes}
+              description={post.description}
+              url={post.image && post.image.url}
+            />
+          </Link>
+        ))}
+      </div>
+      <p>
+        Please use the below details to login
+        <br /> or you can signup and login
+        <br /> username: admin@admin.com <br />
+        password: Admin1
+      </p>
     </div>
   );
 };
