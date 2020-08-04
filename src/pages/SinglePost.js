@@ -7,6 +7,7 @@ import { LikesContext } from "../context/LikesContext";
 const SinglePost = ({ match, history }) => {
   const { id } = match.params;
   console.log("id", id);
+  const url = process.env.REACT_APP_BACKEND_URL;
 
   const { user, setUser } = useContext(UserContext);
   console.log("user", user);
@@ -30,7 +31,7 @@ const SinglePost = ({ match, history }) => {
   const [description, setDescription] = useState("");
 
   const fetchPost = async () => {
-    const response = await fetch(`http://localhost:1337/posts/${id}`);
+    const response = await fetch(`${url}/posts/${id}`);
     const data = await response.json();
 
     console.log("data", data);
@@ -40,7 +41,7 @@ const SinglePost = ({ match, history }) => {
   };
 
   const handleDelete = async () => {
-    const response = await fetch(`http://localhost:1337/posts/${id}`, {
+    const response = await fetch(`${url}/posts/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${user.jwt}`,
@@ -54,7 +55,7 @@ const SinglePost = ({ match, history }) => {
     event.preventDefault();
     console.log("handleEditSubmit");
 
-    const response = await fetch(`http://localhost:1337/posts/${id}`, {
+    const response = await fetch(`${url}/posts/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +73,7 @@ const SinglePost = ({ match, history }) => {
 
   const handleLike = async () => {
     try {
-      const response = await fetch("http://localhost:1337/likes", {
+      const response = await fetch("${url}/likes", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${user.jwt}`,
@@ -91,7 +92,7 @@ const SinglePost = ({ match, history }) => {
 
   const handleRemoveLike = async () => {
     try {
-      const response = await fetch(`http://localhost:1337/likes/${id}`, {
+      const response = await fetch(`${url}/likes/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${user.jwt}`,
