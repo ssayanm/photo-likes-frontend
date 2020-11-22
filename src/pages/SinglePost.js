@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import Post from "../components/Post";
-
 import { UserContext } from "../context/UserContext";
 import { LikesContext } from "../context/LikesContext";
 
